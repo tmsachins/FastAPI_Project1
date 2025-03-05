@@ -1,0 +1,10 @@
+
+pip install -r requirements.txt
+
+fastapi
+uvicorn > server to run the fastapi server 
+
+
+
+uvicorn main:app --reload
+
