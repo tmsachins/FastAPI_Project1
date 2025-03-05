@@ -7,16 +7,16 @@ app = FastAPI()
 def index():
     return 'Hello there!'
 
-@app.get('/property/{id}')
-def property(id:int):
-    return (f'This is a property page for property {id}')
+@app.get('/user/admin')
+def admin():
+    return (f'This is admin page')
 
-@app.get('/profile/{username}')
+@app.get('/user/{username}')
 def profile(username:str):
-    return (f'This is a profile page for user {username}')
+    return (f'This is a profile page for {username}')
 
-@app.get('/movies')
-def movies():
-    return {'movie_list':{'Movie 1', 'Movie 2'}}
+# @app.get('/movies')
+# def movies():
+#     return {'movie_list':{'Movie 1', 'Movie 2'}}
 
 
