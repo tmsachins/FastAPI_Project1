@@ -16,7 +16,7 @@ def profile(username:str):
     return (f'This is a profile page for {username}')
 
 @app.get('/products')
-def products(id:int=1,price=0):
+def products(id:int=None,price=None):
     return {f'Product with an id: {id} and price {price}'}
 
 @app.get('/profile/{userid}/comments')
