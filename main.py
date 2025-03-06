@@ -16,11 +16,11 @@ class Product(BaseModel):
 # creating instance of the class
 app = FastAPI()
 
-@app.post('/addproduct')
-def addproduct(product:Product):
+@app.post('/addproduct/{product_id}')
+def addproduct(product:Product,product_id: int, category:str):
     product.discounted_price = product.price - \
         (product.price * product.discount / 100)
-    return product
+    return {"product_id":product_id, "product": product, "category": category}
 
 @app.post('/adduser')
 def adduser(profile:Profile):
