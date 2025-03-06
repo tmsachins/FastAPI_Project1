@@ -1,4 +1,3 @@
-from fastapi import FastAPI
 
 # creating instance of the class
 app = FastAPI()
