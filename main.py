@@ -36,6 +36,22 @@ class Product(BaseModel):
     tags: Set[str] = []
     image: List[Image]
 
+    class Config:
+        schema_extra ={
+            "example": {
+                "name": "John Doe",
+                "price": 100,
+                "discount": 10,
+                "discounted_price": 0,
+                "tags": ["Electronics", "Laptops"],
+                "image": [
+                    {"url": "https://example1.com/image1.jpg", "name": "Image 1"},
+                    {"url": "https://example2.com/image2.jpg", "name": "Image 2"}
+                ]
+            }
+        }
+
+
 class Offer(BaseModel):
     name: str
     description: str
