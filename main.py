@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel, Field
 #pydantic allows us to create out own data types using models
+from typing import Set
 
 class Profile(BaseModel):
     name: str
@@ -12,6 +13,7 @@ class Product(BaseModel):
     price: int = Field(title="Price of the item",gt=0, description = "This would be the price of the item being added")
     discount:int
     discounted_price: float
+    tags: Set[str] = []
 
 class User(BaseModel):
     name: str
