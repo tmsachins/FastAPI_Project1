@@ -4,20 +4,20 @@ from pydantic import BaseModel, Field, HttpUrl
 # creating instance of the class
 app = FastAPI()
 
-def receive_signal(signalNumber, frame):
-    print('Received:', signalNumber)
-    sys.exit()
+# def receive_signal(signalNumber, frame):
+#     print('Received:', signalNumber)
+#     sys.exit()
 
 
-@app.on_event("startup")
-async def startup_event():
-    import signal
-    signal.signal(signal.SIGINT, receive_signal)
+# @app.on_event("startup")
+# async def startup_event():
+#     import signal
+#     signal.signal(signal.SIGINT, receive_signal)
 
 # ---------------
 
 #pydantic allows us to create out own data types using models
-from typing import Set
+from typing import Set, List
 
 class Profile(BaseModel):
     name: str
@@ -34,12 +34,21 @@ class Product(BaseModel):
     discount:int
     discounted_price: float
     tags: Set[str] = []
-    image: Image
+    image: List[Image]
+
+class Offer(BaseModel):
+    name: str
+    description: str
+    price: float
+    products: List[Product]
 
 class User(BaseModel):
     name: str
     email:str
 
+@app.post('/addoffer')
+def addoffer(offer:Offer):
+    return {offer}
 
 @app.post('/purchase')
 def purchase(user:User, product:Product):
