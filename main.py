@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Form
 from pydantic import BaseModel, Field, HttpUrl
 from uuid import UUID
 from datetime import date, datetime, time, timedelta
@@ -59,6 +59,11 @@ class Offer(BaseModel):
 class User(BaseModel):
     name: str = Field(example="John Doe")
     email:str = Field(example="John@anc.com")
+
+@app.post('/login')
+def login(username: str = Form(...), password: str= Form(...)):
+    return {"username": username}
+
 
 @app.post('/addevent')
 def addevent(event: Event):
