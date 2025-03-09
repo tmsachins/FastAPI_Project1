@@ -37,7 +37,7 @@ class Product(BaseModel):
     image: List[Image]
 
     class Config:
-        schema_extra ={
+        json_schema_extra ={
             "example": {
                 "name": "John Doe",
                 "price": 100,
@@ -59,8 +59,8 @@ class Offer(BaseModel):
     products: List[Product]
 
 class User(BaseModel):
-    name: str
-    email:str
+    name: str = Field(example="John Doe")
+    email:str = Field(example="John@anc.com")
 
 @app.post('/addoffer')
 def addoffer(offer:Offer):
