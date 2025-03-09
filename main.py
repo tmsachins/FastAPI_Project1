@@ -1,20 +1,18 @@
 from fastapi import FastAPI
 from pydantic import BaseModel, Field, HttpUrl
+from uuid import UUID
+from datetime import date, datetime, time, timedelta
 
 # creating instance of the class
 app = FastAPI()
 
-# def receive_signal(signalNumber, frame):
-#     print('Received:', signalNumber)
-#     sys.exit()
-
-
-# @app.on_event("startup")
-# async def startup_event():
-#     import signal
-#     signal.signal(signal.SIGINT, receive_signal)
-
-# ---------------
+class Event(BaseModel):
+    event_id: UUID
+    start_date: date
+    start_time: datetime
+    end_time: datetime
+    repeat_time: time
+    execute_after: timedelta
 
 #pydantic allows us to create out own data types using models
 from typing import Set, List
@@ -61,6 +59,10 @@ class Offer(BaseModel):
 class User(BaseModel):
     name: str = Field(example="John Doe")
     email:str = Field(example="John@anc.com")
+
+@app.post('/addevent')
+def addevent(event: Event):
+    return event
 
 @app.post('/addoffer')
 def addoffer(offer:Offer):
